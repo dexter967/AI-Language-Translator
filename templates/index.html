@@ -90,16 +90,7 @@
                 "Chinese (Simplified)"] %} {% set selected =
                 request.form.get('language', 'French') %} {% for lang in langs
                 %}
-                <option
-                  value="{{ lang }}"
-                  {%
-                  if
-                  lang=""
-                  ="selected"
-                  %}selected{%
-                  endif
-                  %}
-                >
+              <option value="{{ lang }}" {% if lang == selected %}selected{% endif %}>{{ lang }}</option>
                   {{ lang }}
                 </option>
                 {% endfor %}
