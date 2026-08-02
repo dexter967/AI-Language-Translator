@@ -1,98 +1,143 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meridian — Translate anything, anywhere</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meridian — Translate anything, anywhere</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <div>
+        <div class="mark">Meri<span>dian</span></div>
+        <div class="mark-sub">Translation, crossed over</div>
+      </div>
+    </header>
 
-<header>
-  <div>
-    <div class="mark">Meri<span>dian</span></div>
-    <div class="mark-sub">Translation, crossed over</div>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="marquee-row" aria-hidden="true">
-    <div class="marquee-line"><span class="marquee-track">Hello · Bonjour · Hola · こんにちは · Hallo · Ciao · 你好 · Olá · Hello · Bonjour · Hola · こんにちは · Hallo · Ciao · 你好 · Olá&nbsp;</span></div>
-    <div class="marquee-line"><span class="marquee-track reverse">Привет · مرحبا · नमस्ते · Merhaba · Hej · Γεια · Привет · مرحبا · नमस्ते · Merhaba · Hej · Γεια&nbsp;</span></div>
-  </div>
-  <div class="hero-content">
-    <h1>Say it in <em>any</em> language.</h1>
-    <p>Paste your text, pick a destination, and let it cross over.</p>
-  </div>
-</section>
-
-<div class="stage">
-  <form method="POST">
-    <div class="card">
-
-      <div class="panel">
-        <div class="panel-label">
-          <span class="chip">TEXT</span>
+    <section class="hero">
+      <div class="marquee-row" aria-hidden="true">
+        <div class="marquee-line">
+          <span class="marquee-track"
+            >Hello · Bonjour · Hola · こんにちは · Hallo · Ciao · 你好 · Olá ·
+            Hello · Bonjour · Hola · こんにちは · Hallo · Ciao · 你好 ·
+            Olá&nbsp;</span
+          >
         </div>
-        <textarea name="text" id="sourceText" placeholder="Type or paste text to translate…" required>{{ request.form.get('text', '') }}</textarea>
-        <div class="panel-actions">
-          <button type="button" class="mini-btn" id="clearBtn">✕ Clear</button>
+        <div class="marquee-line">
+          <span class="marquee-track reverse"
+            >Привет · مرحبا · नमस्ते · Merhaba · Hej · Γεια · Привет · مرحبا ·
+            नमस्ते · Merhaba · Hej · Γεια&nbsp;</span
+          >
         </div>
       </div>
-
-      <div class="divider">
-        <div class="swap-group">
-          <button type="submit" class="swap" title="Translate" aria-label="Translate">
-            <span class="glyph-a">A</span><span class="glyph-arrow">⇄</span><span class="glyph-b">文</span>
-          </button>
-          <span class="swap-label">Translate</span>
-        </div>
+      <div class="hero-content">
+        <h1>Say it in <em>any</em> language.</h1>
+        <p>Paste your text, pick a destination, and let it cross over.</p>
       </div>
+    </section>
 
-      <div class="panel">
-        <div class="panel-label">
-          <span class="chip">TRANSLATE TO</span>
-          <select name="language" class="chip">
-            {% set langs = ["French", "Spanish", "German", "Japanese", "Portuguese", "Italian", "Hindi", "Arabic", "Korean", "Chinese (Simplified)"] %}
-            {% set selected = request.form.get('language', 'French') %}
-            {% for lang in langs %}
-            <option value="{{ lang }}" {% if lang == selected %}selected{% endif %}>{{ lang }}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <div class="output" id="outputText">{{ translated_text }}</div>
-        <div class="panel-actions">
-          <button type="button" class="mini-btn" id="copyBtn">⧉ Copy</button>
-        </div>
-      </div>
+    <div class="stage">
+      <form method="POST">
+        <div class="card">
+          <div class="panel">
+            <div class="panel-label">
+              <span class="chip">TEXT</span>
+            </div>
+            <textarea
+              name="text"
+              id="sourceText"
+              placeholder="Type or paste text to translate…"
+              required
+            >
+{{ request.form.get('text', '') }}</textarea
+            >
+            <div class="panel-actions">
+              <button type="button" class="mini-btn" id="clearBtn">
+                ✕ Clear
+              </button>
+            </div>
+          </div>
 
+          <div class="divider">
+            <div class="swap-group">
+              <button
+                type="submit"
+                class="swap"
+                title="Translate"
+                aria-label="Translate"
+              >
+                <span class="glyph-a">A</span><span class="glyph-arrow">⇄</span
+                ><span class="glyph-b">文</span>
+              </button>
+              <span class="swap-label">Translate</span>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-label">
+              <span class="chip">TRANSLATE TO</span>
+              <select name="language" class="chip">
+                {% set langs = ["French", "Spanish", "German", "Japanese",
+                "Portuguese", "Italian","Telugu" "Hindi", "Arabic", "Korean",
+                "Chinese (Simplified)"] %} {% set selected =
+                request.form.get('language', 'French') %} {% for lang in langs
+                %}
+                <option
+                  value="{{ lang }}"
+                  {%
+                  if
+                  lang=""
+                  ="selected"
+                  %}selected{%
+                  endif
+                  %}
+                >
+                  {{ lang }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="output" id="outputText">{{ translated_text }}</div>
+            <div class="panel-actions">
+              <button type="button" class="mini-btn" id="copyBtn">
+                ⧉ Copy
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
-  </form>
-</div>
 
-<script>
-  document.getElementById('clearBtn').addEventListener('click', function () {
-    document.getElementById('sourceText').value = '';
-    document.getElementById('sourceText').focus();
-  });
+    <script>
+      document
+        .getElementById("clearBtn")
+        .addEventListener("click", function () {
+          document.getElementById("sourceText").value = "";
+          document.getElementById("sourceText").focus();
+        });
 
-  document.getElementById('copyBtn').addEventListener('click', function () {
-    var text = document.getElementById('outputText').innerText.trim();
-    if (!text) return;
-    navigator.clipboard.writeText(text).then(function () {
-      var btn = document.getElementById('copyBtn');
-      var original = btn.innerHTML;
-      btn.innerHTML = '✓ Copied';
-      btn.classList.add('copied');
-      setTimeout(function () {
-        btn.innerHTML = original;
-        btn.classList.remove('copied');
-      }, 1500);
-    });
-  });
-</script>
-
-</body>
+      document.getElementById("copyBtn").addEventListener("click", function () {
+        var text = document.getElementById("outputText").innerText.trim();
+        if (!text) return;
+        navigator.clipboard.writeText(text).then(function () {
+          var btn = document.getElementById("copyBtn");
+          var original = btn.innerHTML;
+          btn.innerHTML = "✓ Copied";
+          btn.classList.add("copied");
+          setTimeout(function () {
+            btn.innerHTML = original;
+            btn.classList.remove("copied");
+          }, 1500);
+        });
+      });
+    </script>
+  </body>
 </html>
