@@ -50,6 +50,6 @@ Text:
                 translated_text = f"Translation failed: {e}"
 
     return render_template("index.html", translated_text=translated_text)
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False)
